@@ -1,117 +1,33 @@
-# Smart Health & Wellness Advisor (HeathIQ.AI)
+# 🧠💪 Smart Health & Wellness Advisor
 
-## Overview
-
-**HeathIQ.AI** is a Smart Health & Wellness Advisor that leverages artificial intelligence to provide personalized health recommendations, wellness tracking, and actionable insights. The project aims to empower users to take control of their health through intelligent analysis of their lifestyle, daily activities, and health data.
-
-## Features
-
-- Personalized health and wellness advice
-- AI-driven recommendations based on user input and tracked data
-- Activity and habit tracking
-- Goal setting and progress monitoring
-- User-friendly dashboard and data visualization
-- Secure data handling
-
-## Technologies Used
-
-- **Backend:** Python, FastAPI/Django/Flask (Specify your framework)
-- **Frontend:** React.js/Vue.js/Angular (Specify your framework)
-- **Database:** MongoDB/PostgreSQL/SQLite (Specify your DB)
-- **AI/ML:** TensorFlow/PyTorch/Scikit-learn (Specify your framework)
-- **Authentication:** JWT/OAuth2 (Specify your method)
-- **Others:** Docker, RESTful APIs
-
-> **Note:** Please update the above technologies according to your actual implementation.
-
-## Folder Structure
-
-```
-Smart-Health-Wellness-Advisor-HeathIQ.AI/
-│
-├── backend/                # Server-side code (APIs, models, ML logic)
-│   ├── app/                # Main application logic
-│   ├── models/             # Database models
-│   ├── routes/             # API route handlers
-│   ├── services/           # Business logic and utilities
-│   ├── tests/              # Backend unit/integration tests
-│   └── requirements.txt    # Backend dependencies
-│
-├── frontend/               # Client-side code (UI, static assets)
-│   ├── src/                # Main source code (components, pages, utils)
-│   ├── public/             # Static public assets
-│   ├── tests/              # Frontend tests
-│   └── package.json        # Frontend dependencies
-│
-├── data/                   # Sample datasets or user-uploaded data
-│
-├── docs/                   # Documentation, diagrams, API specs
-│
-├── scripts/                # Utility scripts (deployment, setup, data processing)
-│
-├── .gitignore
-├── README.md
-└── LICENSE
-```
-
-> **Note:** The folder structure above is a common organizational scheme. Please adjust it to reflect your actual project layout.
-
-## Getting Started
-
-### Prerequisites
-
-- Python 3.8+ (for backend)
-- Node.js & npm/yarn (for frontend)
-- MongoDB/PostgreSQL/other DB
-- Docker (optional for containerization)
-
-### Setup
-
-#### Backend
-
-```bash
-cd backend
-pip install -r requirements.txt
-# Run migrations/setup as needed
-python main.py  # or the entry point for your server
-```
-
-#### Frontend
-
-```bash
-cd frontend
-npm install
-npm start
-```
-
-#### Environment Variables
-
-Set up environment variables as needed (e.g., database URIs, secret keys, API endpoints).
-
-### Docker (Optional)
-
-To run the entire stack with Docker:
-
-```bash
-docker-compose up --build
-```
-
-## Contributing
-
-1. Fork the repo
-2. Create your feature branch: `git checkout -b feature/your-feature`
-3. Commit your changes: `git commit -am 'Add new feature'`
-4. Push to the branch: `git push origin feature/your-feature`
-5. Open a pull request
-
-## License
-
-Distributed under the MIT License. See `LICENSE` for more information.
-
-## Contact
-
-For any inquiries, contributions, or support, please open an issue or contact the maintainer.
+A full-stack web application that collects user health data and provides personalized diet and exercise recommendations based on the input.
 
 ---
 
-*Happy Hacking and Stay Healthy!*
+## Features
+
+- 📝 **Interactive Health Form**  
+  Collects user data such as age, gender, height, weight, sleep habits, stress levels, exercise preferences, water intake, and more.
+
+- 🔍 **Personalized Recommendations**  
+  Suggests diet plans and exercise routines tailored to the user's health profile.
+
+- 💾 **Data Persistence**  
+  Stores user input securely in MongoDB via a Node.js and Express backend.
+
+- ✅ **Form Validation & User Feedback**  
+  Real-time input validation with clear error messages and form reset on successful submission.
+
+---
+
+## Tech Stack
+
+- **Frontend:** React, Tailwind CSS  
+- **Backend:** Node.js, Express.js  
+- **Database:** MongoDB (Mongoose)  
+- **API:** RESTful API for data submission
+
+---
+
+## Folder Structure
+
