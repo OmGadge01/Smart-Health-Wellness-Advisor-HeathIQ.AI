@@ -1,31 +1,5 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
-
-
-// const handleSubmit = async (e) => {
-//   e.preventDefault();
-
-//   const hasErrors = Object.values(errors).some(error => error !== '');
-//   if (hasErrors) {
-//     alert('Please fix the errors before submitting');
-//     return;
-//   }
-
-//   try {
-//     const response = await fetch("http://localhost:5000/api/submit", {
-//       method: "POST",
-//       headers: { "Content-Type": "application/json" },
-//       body: JSON.stringify(form),
-//     });
-
-//     const result = await response.json();
-//     alert(result.message);
-//   } catch (error) {
-//     console.error("Error submitting form:", error);
-//     alert("Error submitting form");
-//   }
-// };
-
+import { useNavigate } from 'react-router-dom'
 
 const HealthForm = () => {
   const [form, setForm] = useState({
@@ -35,6 +9,11 @@ const HealthForm = () => {
     gender: '',
     height: '',
     weight: '',
+    mealType: '',
+    dailyMeals: '',
+    snacksFrequency: '',
+    sugarIntake: '',
+    location: '',
     sleep: 7,
     exerciseFrequency: '',
     exerciseType: '',
@@ -42,6 +21,7 @@ const HealthForm = () => {
     allergies: '',
     alcohol: '',
     smoking: false,
+
     stress: 5
   })
 
@@ -52,6 +32,11 @@ const HealthForm = () => {
     gender: '',
     height: '',
     weight: '',
+    mealType: '',
+    dailyMeals: '',
+    snacksFrequency: '',
+    sugarIntake: '',
+    location: '',
     sleep: '',
     exerciseFrequency: '',
     exerciseType: '',
@@ -86,55 +71,63 @@ const HealthForm = () => {
     setErrors({ ...errors, [field]: error })
   }
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  const hasErrors = Object.values(errors).some((error) => error !== '');
-  if (hasErrors) {
-    alert('Please fix the errors before submitting');
-  } else {
-    try {
-      const response = await fetch('http://localhost:5000/api/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
-      });
+  const navigate = useNavigate() 
 
-      const result = await response.json();
-      alert(result.message);
+  const handleSubmit = async e => {
+    e.preventDefault()
+    const hasErrors = Object.values(errors).some(error => error !== '')
+    if (hasErrors) {
+      alert('Please fix the errors before submitting')
+    } else {
+      try {
+        const response = await fetch('http://localhost:5000/api/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(form)
+        })
 
-      // ✅ Reset form after successful submission
-      setForm({
-        name: '',
-        email: '',
-        age: '',
-        gender: '',
-        height: '',
-        weight: '',
-        sleep: 7,
-        exerciseFrequency: '',
-        exerciseType: '',
-        waterIntake: '',
-        allergies: '',
-        alcohol: '',
-        smoking: false,
-        stress: 5,
-      });
+        const result = await response.json()
+        alert(result.message)
 
-      // Optional: also clear any errors
-      setErrors({});
-    } catch (error) {
-      console.error('Error submitting form:', error);
-      alert('Error submitting form');
+        //  Redirect to dashboard page
+        navigate('/dashboard') // <-- Add this line
+
+        // Optionally reset form
+        setForm({
+          name: '',
+          email: '',
+          age: '',
+          gender: '',
+          height: '',
+          weight: '',
+          mealType: '',
+          dailyMeals: '',
+          snacksFrequency: '',
+          sugarIntake: '',
+          location: '',
+          sleep: 7,
+          exerciseFrequency: '',
+          exerciseType: '',
+          waterIntake: '',
+          allergies: '',
+          alcohol: '',
+          smoking: false,
+          stress: 5
+        })
+
+        setErrors({})
+      } catch (error) {
+        console.error('Error submitting form:', error)
+        alert('Error submitting form')
+      }
     }
   }
-};
 
   return (
     <div className='max-w-2xl mx-auto p-6 m-8 bg-gray-100 shadow-md rounded-2xl'>
       <h2 className='text-3xl font-bold text-center items-center text-blue-600 mb-4'>
         🏋️‍♀️ Health and Wellness Form 🏋️‍♀️
       </h2>
-      
 
       {/* Name */}
       <div className='mb-4'>
@@ -222,6 +215,75 @@ const handleSubmit = async (e) => {
           }`}
         />
         {errors.weight && <div className='text-red-500'>{errors.weight}</div>}
+      </div>
+
+      {/* Meal Type */}
+      <div className='mb-4'>
+        <label className='block mb-1 text-gray-700'>Meal Preference *</label>
+        <select
+          value={form.mealType || ''}
+          onChange={e => handleChange('mealType', e.target.value)}
+          className='w-full p-2 border rounded-xl'
+        >
+          <option value=''>Select</option>
+          <option value='Vegetarian'>Vegetarian</option>
+          <option value='Non-Vegetarian'>Non-Vegetarian</option>
+          <option value='Vegan'>Vegan</option>
+        </select>
+      </div>
+
+      {/* Number of Meals Per Day */}
+      <div className='mb-4'>
+        <label className='block mb-1 text-gray-700'>Meals per Day *</label>
+        <input
+          type='number'
+          min='1'
+          max='10'
+          value={form.dailyMeals || ''}
+          onChange={e => handleChange('dailyMeals', e.target.value)}
+          className='w-full p-2 border rounded-xl'
+        />
+      </div>
+
+      {/* Snacking Frequency */}
+      <div className='mb-4'>
+        <label className='block mb-1 text-gray-700'>Snacking Frequency *</label>
+        <select
+          value={form.snacksFrequency || ''}
+          onChange={e => handleChange('snacksFrequency', e.target.value)}
+          className='w-full p-2 border rounded-xl'
+        >
+          <option value=''>Select</option>
+          <option value='Rarely'>Rarely</option>
+          <option value='Sometimes'>Sometimes</option>
+          <option value='Often'>Often</option>
+        </select>
+      </div>
+
+      {/* Sugar Intake */}
+      <div className='mb-4'>
+        <label className='block mb-1 text-gray-700'>Sugar Intake *</label>
+        <select
+          value={form.sugarIntake || ''}
+          onChange={e => handleChange('sugarIntake', e.target.value)}
+          className='w-full p-2 border rounded-xl'
+        >
+          <option value=''>Select</option>
+          <option value='Low'>Low</option>
+          <option value='Moderate'>Moderate</option>
+          <option value='High'>High</option>
+        </select>
+      </div>
+
+      {/* Location */}
+      <div className='mb-4'>
+        <label className='block mb-1 text-gray-700'>City / Locality *</label>
+        <input
+          type='text'
+          value={form.location || ''}
+          onChange={e => handleChange('location', e.target.value)}
+          className='w-full p-2 border rounded-xl'
+        />
       </div>
 
       {/* Sleep Duration */}
